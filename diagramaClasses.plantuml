@@ -1,0 +1,78 @@
+@startuml PPSW
+
+class Presentation {
+   - title: String
+   - showList: ArrayList<Slide>
+   - slideViewComponent: SlideViewerComponent
+   - currentSlideNumber: int
+
+   + getSize()
+   + getTitle()
+   + void setTitle(String nt)
+   + void setShowView(SlideViewerComponent slideViewerComponent)
+   + int getSlideNumber()
+   + void setSlideNumber(int number)
+   + void prevSlide()
+   + void nextSlide()
+   void clear()
+   + void append(Slide slide)
+   + Slide getSlide(int number)
+   + Slide getCurrentSlide()
+   + void exit(int n)
+}
+
+class Slide {
+   + WIDTH: final static int
+   + HEIGHT: final static int
+   # title: TextItem
+   # items: Vector<SlideItem>
+   + void append(SlideItem anItem)
+   + String getTitle()
+   + void setTitle(String newTitle)
+   + void append(int level, String message)
+   + SlideItem getSlideItem(int number)
+   + Vector<SlideItem> getSlideItems()
+   + int getSize()
+   + void draw(Graphics g, Rectangle area, ImageObserver view)
+   + float getScale(Rectangle area)
+}
+
+class SlideItem {
+   - level: int
+   + int getLevel()
+   + {abstract} Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale,
+      Style style)
+   + {abstract} void draw(int x, int y, float scale, Graphics g, Style style,
+      ImageObserver observer)
+}
+
+class TextItem {
+   - text: String
+   - EMPTYTEXT: static final String
+   + String getText()
+   + AttributedString getAttributedString(Style style, float scale)
+   + Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style myStyle)
+   + void draw(int x, int y, float scale, Graphics g, Style myStyle, ImageObserver o)
+   - List<TextLayout> getLayouts(Graphics g, Style s, float scale)
+   + String toString()
+}
+
+class SlideViewerComponent {
+   - serialVersionUID: static final long
+   - BGCOLOR: static final Color
+   - COLOR: static final Color
+   - FONTNAME: static final String
+   - FONTSTYLE: static final int
+   - FONTHEIGHT: static final int
+   - XPOS: static final int
+   - YPOS: static final int
+   - slide: Slide
+   - labelFont: Font
+   - presentation: Presentation
+   - frame: JFrame
+   + Dimension getPreferredSize()
+   + void update(Presentation presentation, Slide data)
+   + void paintComponent(Graphics g)
+}
+
+@enduml
