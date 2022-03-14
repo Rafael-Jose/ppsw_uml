@@ -75,4 +75,9 @@ class SlideViewerComponent {
    + void paintComponent(Graphics g)
 }
 
+Slide o-- Presentation
+SlideViewerComponent o-- Presentation
+SlideItem o-- Slide
+SlideItem <|-- TextItem
+
 @enduml
