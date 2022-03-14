@@ -1,0 +1,14 @@
+@startuml PPSW
+
+actor User 
+participant Presentation
+participant Menu 
+participant Slide 
+
+
+Menu->User: Finalizar Apresentação
+User->Presentation: Iniciar Apresentação
+User->Menu: Manipular Slides
+User->Slide: Passar e Voltar
+
+@enduml
